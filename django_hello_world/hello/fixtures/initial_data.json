@@ -40,8 +40,8 @@
         "model": "accounts.userprofile", 
         "fields": {
             "user": 2, 
-            "birthDate":"1970-01-02",
-            "bio": "Short bio", 
+            "birthday":"1970-01-02",
+            "bio": "I was born in Kiev", 
             "jabber": "",
             "skype": "oleg.scopich",
             "otherContacts": ""

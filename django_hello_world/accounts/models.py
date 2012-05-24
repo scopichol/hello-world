@@ -3,7 +3,7 @@ from django.contrib.auth.models import User
 
 class UserProfile(models.Model):
     user = models.OneToOneField(User)
-    birthDate = models.DateField(verbose_name="Date of birth", null=True, blank=True)
+    birthday = models.DateField(verbose_name="Date of birth", null=True, blank=True)
     bio = models.TextField(verbose_name="Biography", null=True, blank=True)
     jabber = models.EmailField(verbose_name="Jabber", null=True, blank=True)
     skype = models.TextField(max_length=50, verbose_name="Skype", null=True, blank=True)
