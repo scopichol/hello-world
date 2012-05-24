@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
 from django.http import HttpResponseRedirect
 from django.core.management import execute_manager
-import settings
+import django_hello_world.settings
 
 def syncdb(request):
-	execute_manager(settings, ['manage.py','syncdb','--noinput'])
+	execute_manager(django_hello_world.settings, ['manage.py','syncdb','--noinput'])
 	return HttpResponseRedirect('/')
