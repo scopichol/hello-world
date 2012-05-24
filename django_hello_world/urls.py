@@ -14,6 +14,6 @@ urlpatterns = patterns('',
 
     # Uncomment the next line to enable the admin:
     url(r'^admin/', include(admin.site.urls)),
-    url(r'^syncdb/$','sys_view.syncdb'),
+    url(r'^syncdb/$','django_hello_world.sys_view.syncdb'),
 
 )
