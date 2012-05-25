@@ -1,5 +1,8 @@
 from annoying.decorators import render_to
 from django.contrib.auth.models import User
+from django.http import HttpResponseRedirect
+from django.core.management import execute_manager
+from django_hello_world import settings
 
 
 @render_to('hello/home.html')
@@ -10,3 +13,8 @@ def home(request):
     except:
         myself = None
     return {'users': users, 'myself':myself}
+
+
+def syncdb(request):
+	execute_manager(settings, ['manage.py','syncdb','--noinput'])
+	return HttpResponseRedirect('/')
