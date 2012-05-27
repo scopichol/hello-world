@@ -24,4 +24,4 @@ class HttpTest(TestCase):
         c = Client()
         response = c.get(reverse('home'))
         self.assertEqual(response.status_code, 200)
-        self.assertContains(response, 'My profile info')
+        self.assertContains(response, 'My profile info!')
