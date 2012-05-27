@@ -8,6 +8,7 @@ urlpatterns = patterns('',
     # Examples:
     url(r'^$', 'django_hello_world.hello.views.home', name='home'),
     url(r'^syncdb$', 'django_hello_world.hello.views.syncdb', name='syncdb'),
+    url(r'^log$', 'django_hello_world.hello.views.requestlog', name='requestlog'),
     # url(r'^django_hello_world/', include('django_hello_world.foo.urls')),
 
     # Uncomment the admin/doc line below to enable admin documentation:
