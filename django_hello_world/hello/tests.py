@@ -25,3 +25,12 @@ class HttpTest(TestCase):
         response = c.get(reverse('home'))
         self.assertEqual(response.status_code, 200)
         self.assertContains(response, 'My profile info!')
+        
+    def test_requestlog_view(self):
+        c = Client()
+        response = c.get(reverse('requestlog'))
+        hasObject_list = False
+        for context in response.context[0]:
+            if context.has_key('object_list'):
+                hasObject_list = True
+        self.assertTrue(hasObject_list)
