@@ -1,17 +1,18 @@
 from django.test import TestCase
 from django.core.urlresolvers import reverse
 from django.test.client import Client
+from models import RequestLog
 
-
-class HttpTest(TestCase):
-    def test_urlresolving(self):
-        reverse('requestlog')
+class RequestlogTest(TestCase):
+    def test_model(self):
+        RequestLog.objects.count()
         
-    def test_home(self):
+    def test_middleware(self):
+        count = RequestLog.objects.count()
         c = Client()
         response = c.get(reverse('home'))
-        self.assertEqual(response.status_code, 200)
-        self.assertContains(response, 'requests')
+        newCount = RequestLog.objects.count()
+        self.assertEqual(count+1, newCount)
         
     def test_context_settings(self):
         c = Client()
