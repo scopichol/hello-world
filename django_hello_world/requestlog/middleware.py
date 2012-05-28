@@ -1,4 +1,5 @@
 from models import RequestLog
+from django.db import  DatabaseError
 
 class RequestlogMiddleware(object):
     def process_request(self, request):
