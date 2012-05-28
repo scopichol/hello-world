@@ -26,7 +26,18 @@ class HttpTest(TestCase):
         self.assertEqual(response.status_code, 200)
         self.assertContains(response, 'My profile info!')
         
-    def test_requestlog_view(self):
+
+class RequestlogTest(TestCase):
+    def test_link(self):
+        c = Client()
+        response = c.get(reverse('home'))
+        self.assertEqual(response.status_code, 200)
+        self.assertContains(response, 'requests')
+        
+    def test_urlresolving(self):
+        reverse('requestlog')
+        
+    def test_view(self):
         c = Client()
         response = c.get(reverse('requestlog'))
         hasObject_list = False
