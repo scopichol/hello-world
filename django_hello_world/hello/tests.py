@@ -26,6 +26,15 @@ class HttpTest(TestCase):
         self.assertEqual(response.status_code, 200)
         self.assertContains(response, 'My profile info!')
         
+    def test_context_settings(self):
+        c = Client()
+        response = c.get(reverse('home'))
+        hasSettings = False
+        for context in response.context[0]:
+            if context.has_key('settings'):
+                hasSettings = True
+        self.assertTrue(hasSettings)
+        
 
 class RequestlogTest(TestCase):
     def test_link(self):
