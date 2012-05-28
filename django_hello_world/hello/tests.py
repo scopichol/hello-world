@@ -25,3 +25,32 @@ class HttpTest(TestCase):
         response = c.get(reverse('home'))
         self.assertEqual(response.status_code, 200)
         self.assertContains(response, 'My profile info!')
+        
+    def test_context_settings(self):
+        c = Client()
+        response = c.get(reverse('home'))
+        hasSettings = False
+        for context in response.context[0]:
+            if context.has_key('settings'):
+                hasSettings = True
+        self.assertTrue(hasSettings)
+        
+
+class RequestlogTest(TestCase):
+    def test_link(self):
+        c = Client()
+        response = c.get(reverse('home'))
+        self.assertEqual(response.status_code, 200)
+        self.assertContains(response, 'requests')
+        
+    def test_urlresolving(self):
+        reverse('requestlog')
+        
+    def test_view(self):
+        c = Client()
+        response = c.get(reverse('requestlog'))
+        hasObject_list = False
+        for context in response.context[0]:
+            if context.has_key('object_list'):
+                hasObject_list = True
+        self.assertTrue(hasObject_list)

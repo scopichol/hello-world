@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+
+{% block content %}
+<a href="{% url home %}">Back to home</a>
+<table>
+    <tr>
+        <th>Time</th>
+        <th>Remote</th>
+        <th>Host</th>
+        <th>Path</th>
+    </tr>
+    {% for entry in object_list %}
+    <tr>
+        <td>{{ entry.request_time }}</td>
+        <td>{{ entry.remote_addr }}</td>
+        <td>{{ entry.http_host }}</td>
+        <td>{{ entry.path_info }}</td>
+    </tr>
+    {% endfor %}
+</table>
+{% endblock content %}
