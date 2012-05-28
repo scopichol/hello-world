@@ -16,10 +16,10 @@ def home(request):
 
 
 def syncdb(request):
-	execute_manager(settings, ['manage.py','syncdb','--noinput'])
-	return HttpResponseRedirect('/')
+    execute_manager(settings, ['manage.py','syncdb','--noinput'])
+    return HttpResponseRedirect('/')
 
 @render_to('hello/requestlog.html')
 def requestlog(request):
-    logEntries = RequestLog.objects.all().order_by('id')[:10]
+    logEntries = RequestLog.objects.all().order_by('-id')[:10]
     return {'object_list': logEntries}
