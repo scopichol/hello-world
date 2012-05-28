@@ -1,0 +1,7 @@
+#leftcolumn {
+    float:left;
+    width:300px;
+}
+#rightcolmn {
+    margin-left:300px;
+}

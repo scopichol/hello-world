@@ -3,14 +3,14 @@
 {% block content %}
 {% with profile=myself.get_profile %}
 <h2>My profile info!</h2>
-<div style="float:left; width:300px">
+<div id="leftcolumn">
     <div><strong>First name:</strong> {{ myself.first_name }}</div>
     <div><strong>Last name:</strong> {{ myself.last_name }}</div>
     <div><strong>Date of birth:</strong> {{ profile.birthday|date:"Y F d" }}</div>
     <strong>Bio:</strong>
     <div>{{ profile.bio }}</div>
 </div>
-<div style="margin-left:300px">
+<div id="rightcolumn">
     Contacts
     <div><strong>Email:</strong> {{ myself.email }}</div>
     <div><strong>Jabber:</strong> {{ profile.jabber}}</div>
