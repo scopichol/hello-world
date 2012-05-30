@@ -2,6 +2,12 @@
     float:left;
     width:300px;
 }
-#rightcolumn {
-    margin-left:300px;
+
+#leftcolumn img {
+    width:300px;
 }
+
+#rightcolumn {
+    margin-left:310px;
+}
+
