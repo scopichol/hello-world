@@ -4,6 +4,7 @@ from django.http import HttpResponseRedirect
 from django.core.management import execute_manager
 from django_hello_world import settings
 from django_hello_world.requestlog.models import RequestLog
+from django_hello_world.accounts.forms import UserProfileForm, UserForm
 
 @render_to('hello/home.html')
 def home(request):
@@ -17,6 +18,10 @@ def home(request):
 
 def syncdb(request):
     execute_manager(settings, ['manage.py','syncdb','--noinput'])
+    return HttpResponseRedirect('/')
+    
+def reset_accounts(request):
+    execute_manager(settings, ['manage.py','reset','accounts','--noinput'])
     return HttpResponseRedirect('/')
 
 @render_to('hello/requestlog.html')

@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+
+{% block content %}
+{% with profile=myself.get_profile %}
+<h2>Edit profile info!</h2>
+<form enctype="multipart/form-data" action="" method="post">{% csrf_token %}
+{{ profileForm.user }}
+<div id="leftcolumn">
+    <div>{{ userForm.first_name.errors }}{{ userForm.first_name.label_tag }}: {{ userForm.first_name }}</div>
+    <div>{{ userForm.last_name.errors }}{{ userForm.last_name.label_tag }}: {{ userForm.last_name }}</div>
+    <div>{{ profileForm.birthday.errors }}{{ profileForm.birthday.label_tag }}: {{ profileForm.birthday }}</div>
+    <div>{{ profileForm.photo.errors }}{{ profileForm.photo.label_tag }}: {{ profileForm.photo }}</div>
+</div>
+<div id="rightcolumn">
+    Contacts
+    <div>{{ userForm.email.errors }}{{ userForm.email.label_tag }}: {{ userForm.email }}</div>
+    <div>{{ profileForm.jabber.errors }}{{ profileForm.jabber.label_tag }}: {{ profileForm.jabber }}</div>
+    <div>{{ profileForm.skype.errors }}{{ profileForm.skype.label_tag }}: {{ profileForm.skype }}</div>
+    Other contacts: 
+    <div>{{ profileForm.otherContacts.errors }}{{ profileForm.otherContacts.label_tag }}: {{ profileForm.otherContacts }}</div>
+    <div>{{ profileForm.bio.errors }}{{ profileForm.bio.label_tag }}: {{ profileForm.bio }}</div>
+</div>
+    <div><input type="submit" value="Save"/></div>
+</form>
+{% endwith %}
+<hr>
+<a href="{% url requestlog %}">requests</a>
+{% endblock content %}
