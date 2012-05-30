@@ -5,9 +5,13 @@
 
 #leftcolumn img {
     width:300px;
+    margin-bottom:10px;
 }
 
 #rightcolumn {
     margin-left:310px;
 }
 
+.clear {
+    clear:both;
+}
