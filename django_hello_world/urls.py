@@ -8,6 +8,7 @@ admin.autodiscover()
 urlpatterns = patterns('',
     # Examples:
     url(r'^$', 'django_hello_world.hello.views.home', name='home'),
+    url(r'^profile/', include('django_hello_world.accounts.urls')),
     url(r'^syncdb$', 'django_hello_world.hello.views.syncdb', name='syncdb'),
     url(r'^resetaccounts$', 'django_hello_world.hello.views.reset_accounts', name='reset_accounts'),
     url(r'^log$', 'django_hello_world.hello.views.requestlog', name='requestlog'),
