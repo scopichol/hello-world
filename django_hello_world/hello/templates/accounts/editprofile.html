@@ -1,7 +1,6 @@
 {% extends "base.html" %}
 
 {% block content %}
-{% with profile=myself.get_profile %}
 <h2>Edit profile info!</h2>
 <form enctype="multipart/form-data" action="" method="post">{% csrf_token %}
 {{ profileForm.user }}
@@ -10,19 +9,17 @@
     <div>{{ userForm.last_name.errors }}{{ userForm.last_name.label_tag }}: {{ userForm.last_name }}</div>
     <div>{{ profileForm.birthday.errors }}{{ profileForm.birthday.label_tag }}: {{ profileForm.birthday }}</div>
     <div>{{ profileForm.photo.errors }}{{ profileForm.photo.label_tag }}: {{ profileForm.photo }}</div>
+    {% if profileForm.instance.photo %}
+    <img src="{{MEDIA_URL}}{{ profileForm.instance.photo }}" alt="Profile photo">
+    {% endif %}
 </div>
 <div id="rightcolumn">
-    Contacts
     <div>{{ userForm.email.errors }}{{ userForm.email.label_tag }}: {{ userForm.email }}</div>
     <div>{{ profileForm.jabber.errors }}{{ profileForm.jabber.label_tag }}: {{ profileForm.jabber }}</div>
     <div>{{ profileForm.skype.errors }}{{ profileForm.skype.label_tag }}: {{ profileForm.skype }}</div>
-    Other contacts: 
     <div>{{ profileForm.otherContacts.errors }}{{ profileForm.otherContacts.label_tag }}: {{ profileForm.otherContacts }}</div>
     <div>{{ profileForm.bio.errors }}{{ profileForm.bio.label_tag }}: {{ profileForm.bio }}</div>
 </div>
-    <div><input type="submit" value="Save"/></div>
+    <input type="submit" value="Save"/>
 </form>
-{% endwith %}
-<hr>
-<a href="{% url requestlog %}">requests</a>
 {% endblock content %}

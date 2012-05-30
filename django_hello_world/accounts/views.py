@@ -9,8 +9,6 @@ def editProfile(request):
     if request.method == 'POST':
         userForm = UserForm(request.POST, instance=myself)
         profileForm = UserProfileForm(request.POST, request.FILES, instance=myself.get_profile())
-        print 'userForm', userForm.is_valid()
-        print 'profileForm', profileForm.is_valid()
         if userForm.is_valid() and profileForm.is_valid():
             userForm.save()
             profileForm.save()
