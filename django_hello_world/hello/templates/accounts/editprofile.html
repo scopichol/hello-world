@@ -3,11 +3,12 @@
 {% block content %}
 {% with profile=myself.get_profile %}
 <h2>Edit profile info!</h2>
-<form action="" method="post">{% csrf_token %}
+<form enctype="multipart/form-data" action="" method="post">{% csrf_token %}
 <div id="leftcolumn">
     <div>{{ userForm.first_name.errors }}{{ userForm.first_name.label_tag }}: {{ userForm.first_name }}</div>
     <div>{{ userForm.last_name.errors }}{{ userForm.last_name.label_tag }}: {{ userForm.last_name }}</div>
     <div>{{ profileForm.birthday.errors }}{{ profileForm.birthday.label_tag }}: {{ profileForm.birthday }}</div>
+    <div>{{ profileForm.photo.errors }}{{ profileForm.photo.label_tag }}: {{ profileForm.photo }}</div>
 </div>
 <div id="rightcolumn">
     Contacts
