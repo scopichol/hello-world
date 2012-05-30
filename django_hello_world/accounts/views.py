@@ -2,19 +2,28 @@ from annoying.decorators import render_to
 from django.contrib.auth.models import User
 from django.http import HttpResponseRedirect
 from django_hello_world.accounts.forms import UserProfileForm, UserForm
+from django.shortcuts import get_object_or_404
+from models import UserProfile
 
 @render_to('accounts/editprofile.html')
-def editProfile(request):
-    myself = User.objects.get(id=2)
+def editProfile(request, user_id):
+    user = get_object_or_404(User, pk=user_id)
+    try:
+        profile = user.get_profile()
+    except:
+        profile = None
+
     if request.method == 'POST':
-        userForm = UserForm(request.POST, instance=myself)
-        profileForm = UserProfileForm(request.POST, request.FILES, instance=myself.get_profile())
+        userForm = UserForm(request.POST, instance=user)
+        profileForm = UserProfileForm(request.POST, request.FILES, instance=profile)
         if userForm.is_valid() and profileForm.is_valid():
             userForm.save()
-            profileForm.save()
+            new_profile = profileForm.save(commit=False)
+            new_profile.user = user
+            new_profile.save()
             return HttpResponseRedirect('/')
     else:
-        userForm = UserForm(instance=myself)
-        profileForm = UserProfileForm(instance=myself.get_profile())
+        userForm = UserForm(instance=user)
+        profileForm = UserProfileForm(instance=profile)
         
-    return {'userForm': userForm, 'profileForm': profileForm, 'myself':myself}
+    return {'userForm': userForm, 'profileForm': profileForm}
