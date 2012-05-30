@@ -10,8 +10,13 @@
 
 #rightcolumn {
     margin-left:310px;
+    width:350px;
 }
 
 .clear {
     clear:both;
+}
+
+form div {
+    text-align:right;
 }
