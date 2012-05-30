@@ -4,6 +4,7 @@
 {% with profile=myself.get_profile %}
 <h2>Edit profile info!</h2>
 <form enctype="multipart/form-data" action="" method="post">{% csrf_token %}
+{{ profileForm.user }}
 <div id="leftcolumn">
     <div>{{ userForm.first_name.errors }}{{ userForm.first_name.label_tag }}: {{ userForm.first_name }}</div>
     <div>{{ userForm.last_name.errors }}{{ userForm.last_name.label_tag }}: {{ userForm.last_name }}</div>
