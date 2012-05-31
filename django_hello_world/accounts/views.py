@@ -9,6 +9,9 @@ from django.conf import settings
 @render_to('accounts/editprofile.html')
 def editProfile(request, user_id):
     user = get_object_or_404(User, pk=user_id)
+    if not request.user.has_perm('accounts.change_userprofile') and user != request.user:
+        return HttpResponseRedirect(settings.LOGIN_URL)
+        
     try:
         profile = user.get_profile()
     except:
