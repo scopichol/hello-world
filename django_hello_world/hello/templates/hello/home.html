@@ -7,18 +7,25 @@
     <div><strong>First name:</strong> {{ myself.first_name }}</div>
     <div><strong>Last name:</strong> {{ myself.last_name }}</div>
     <div><strong>Date of birth:</strong> {{ profile.birthday|date:"Y F d" }}</div>
-    <strong>Bio:</strong>
-    <div>{{ profile.bio }}</div>
+    <div><strong>Photo:</strong>
+    {% if profile.photo %}
+    <img src="{{MEDIA_URL}}{{ profile.photo }}" alt="Profile photo">
+    {% endif %}
+    </div>
 </div>
 <div id="rightcolumn">
     Contacts
     <div><strong>Email:</strong> {{ myself.email }}</div>
     <div><strong>Jabber:</strong> {{ profile.jabber}}</div>
     <div><strong>Skype:</strong> {{ profile.skype }}</div>
-    Other contacts: 
+    <strong>Other contacts:</strong> 
     <div>{{ profile.otherContacts }}</div>
+    <strong>Bio:</strong>
+    <div>{{ profile.bio }}</div>
 </div>
 {% endwith %}
+<div class="clear">
 <hr>
 <a href="{% url requestlog %}">requests</a>
+</div>
 {% endblock content %}

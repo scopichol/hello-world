@@ -2,6 +2,21 @@
     float:left;
     width:300px;
 }
-#rightcolmn {
-    margin-left:300px;
+
+#leftcolumn img {
+    width:300px;
+    margin-bottom:10px;
+}
+
+#rightcolumn {
+    margin-left:310px;
+    width:350px;
+}
+
+.clear {
+    clear:both;
+}
+
+form div {
+    text-align:right;
 }

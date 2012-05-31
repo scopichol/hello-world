@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h2>Edit profile info!</h2>
+<form enctype="multipart/form-data" action="" method="post">{% csrf_token %}
+{{ profileForm.user }}
+<div id="leftcolumn">
+    <div>{{ userForm.first_name.errors }}{{ userForm.first_name.label_tag }}: {{ userForm.first_name }}</div>
+    <div>{{ userForm.last_name.errors }}{{ userForm.last_name.label_tag }}: {{ userForm.last_name }}</div>
+    <div>{{ profileForm.birthday.errors }}{{ profileForm.birthday.label_tag }}: {{ profileForm.birthday }}</div>
+    <div>{{ profileForm.photo.errors }}{{ profileForm.photo.label_tag }}: {{ profileForm.photo }}</div>
+    {% if profileForm.instance.photo %}
+    <img src="{{MEDIA_URL}}{{ profileForm.instance.photo }}" alt="Profile photo">
+    {% endif %}
+</div>
+<div id="rightcolumn">
+    <div>{{ userForm.email.errors }}{{ userForm.email.label_tag }}: {{ userForm.email }}</div>
+    <div>{{ profileForm.jabber.errors }}{{ profileForm.jabber.label_tag }}: {{ profileForm.jabber }}</div>
+    <div>{{ profileForm.skype.errors }}{{ profileForm.skype.label_tag }}: {{ profileForm.skype }}</div>
+    <div>{{ profileForm.otherContacts.errors }}{{ profileForm.otherContacts.label_tag }}: {{ profileForm.otherContacts }}</div>
+    <div>{{ profileForm.bio.errors }}{{ profileForm.bio.label_tag }}: {{ profileForm.bio }}</div>
+</div>
+    <input type="submit" value="Save"/>
+</form>
+{% endblock content %}

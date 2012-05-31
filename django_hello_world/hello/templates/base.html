@@ -5,5 +5,16 @@
     <title>{% block title %}No title{% endblock %}</title>
     <link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}main.css">
 </head>
-<body>{% block body %}{% block content %}{% endblock content %}{% endblock body %}</body>
+<body>
+{% block login %}
+    <div id="login">
+    {% if user.is_authenticated %}{{user}}<br>
+        <a href="{% url django.contrib.auth.views.logout %}?next=/">Logout</a>
+        <a href="{% url editprofile user.id %}">Profile</a>
+    {% else %}
+        <a href="{% url django.contrib.auth.views.login %}?next=/">Login</a>
+    {% endif %}
+    </div>
+{% endblock %}
+{% block body %}{% block content %}{% endblock content %}{% endblock body %}</body>
 </html>
