@@ -4,6 +4,7 @@ from django.http import HttpResponseRedirect
 from django_hello_world.accounts.forms import UserProfileForm, UserForm
 from django.shortcuts import get_object_or_404
 from models import UserProfile
+from django.conf import settings
 
 @render_to('accounts/editprofile.html')
 def editProfile(request, user_id):
@@ -11,7 +12,7 @@ def editProfile(request, user_id):
     try:
         profile = user.get_profile()
     except:
-        profile = None
+        profile = UserProfile(user = user)
 
     if request.method == 'POST':
         userForm = UserForm(request.POST, instance=user)
