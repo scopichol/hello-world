@@ -52,7 +52,12 @@ def editProfileAjax(request, user_id):
             new_profile.user = user
             new_profile.save()
             result = 'success'
-            response = {}
+            response = userForm.cleaned_data
+            response.update(profileForm.cleaned_data)
+            del response['user']
+            if response.has_key('photo'):
+                response['photo'] = str(new_profile.photo)
+            response['birthday'] = profileForm.fields['birthday'].widget._format_value(new_profile.birthday)
         else:
             result = 'error'
             response = userForm.errors.copy()
