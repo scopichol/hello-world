@@ -14,7 +14,7 @@ class CalendarWidget(DateInput):
         self.jq_format = jq_format
         
     def render(self, name, value, attrs=None):
-        script= '\n<script>$(function(){$.datepicker.setDefaults({dateFormat: "%s"});$( "#%s" ).datepicker();});</script>'%(self.jq_format, attrs['id'])
+        script= '\n<script>$(function(){$( "#%s" ).datepicker({dateFormat: "%s"});});</script>'%(attrs['id'], self.jq_format)
         input = super(CalendarWidget, self).render( name, value, attrs)
         
         return mark_safe(input+script)
