@@ -1,3 +1,14 @@
+body {
+    margin:0 20px;
+}
+
+#login {
+    float:right;
+}
+
+h2 {
+    clear:both;
+}
 #leftcolumn {
     float:left;
     width:300px;
@@ -20,3 +31,4 @@
 form div {
     text-align:right;
 }
+
