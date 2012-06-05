@@ -2,16 +2,14 @@
 
 {% block content %}
 <h2>Edit profile info!</h2>
-<form enctype="multipart/form-data" action="{% url editprofile user.id %}" method="post" id="profileForm">{% csrf_token %}
+<form enctype="multipart/form-data" action="{% url editprofile_ajax user.id %}" method="post" id="profileForm">{% csrf_token %}
 {{ profileForm.user }}
 <div id="leftcolumn">
     <div>{{ userForm.first_name.errors }}{{ userForm.first_name.label_tag }}: {{ userForm.first_name }}</div>
     <div>{{ userForm.last_name.errors }}{{ userForm.last_name.label_tag }}: {{ userForm.last_name }}</div>
     <div>{{ profileForm.birthday.errors }}{{ profileForm.birthday.label_tag }}: {{ profileForm.birthday }}</div>
-    <div>{{ profileForm.photo.errors }}{{ profileForm.photo.label_tag }}: {{ profileForm.photo }}</div>
-    {% if profileForm.instance.photo %}
-    <img src="{{MEDIA_URL}}{{ profileForm.instance.photo }}" alt="Profile photo">
-    {% endif %}
+    <div id="photo">{{ profileForm.photo.errors }}{{ profileForm.photo.label_tag }}: {{ profileForm.photo }}</div>
+    <img id="imgphoto" src="{{MEDIA_URL}}{{ profileForm.instance.photo }}" alt="Profile photo"{% if not profileForm.instance.photo %} style="display:none"{% endif %}>
 </div>
 <div id="rightcolumn">
     <div>{{ userForm.email.errors }}{{ userForm.email.label_tag }}: {{ userForm.email }}</div>
@@ -25,11 +23,33 @@
 </div>
 </form>
 <script type="text/javascript">
+function display_form_errors(errors, $form) {
+    alert(errors);
+    for (var k in errors) {
+        $form.find('input[name=' + k + ']').after('<div class="error">' + errors[k] + '</div>');
+    }
+}
 $(function(){
-   $("#profileForm").ajaxForm(function() {
+   $("#profileForm").ajaxForm(function(data, statusText, xhr, $form) {
         now = new Date();
         $("#message").remove();
-        $("#profileForm").before("<div id=\"message\">"+now.getHours()+":"+now.getMinutes()+" Save successfully!</div>");
+        $form.find('.error').remove();
+        if (data['result'] == 'success') {
+            $form.before("<div id=\"message\">"+now.getHours()+":"+now.getMinutes()+" Save successfully!</div>");
+            
+            $form.find('#photo a').attr('href','{{MEDIA_URL}}'+data['response']['photo']).html(data['response']['photo']);
+            $form.find('#id_photo').val('');
+            $form.find('#imgphoto').attr('src','{{MEDIA_URL}}'+data['response']['photo']);
+            $form.find('#photo-clear_id').removeAttr('checked');
+            if (data['response']['photo']) {
+                $form.find('#imgphoto').css('display', 'inline');
+            } else {
+                $form.find('#imgphoto').css('display', 'none');
+            }
+        }
+        else if (data['result'] == 'error') {
+            display_form_errors(data['response'], $form);
+        }
    });
 });
 </script>
