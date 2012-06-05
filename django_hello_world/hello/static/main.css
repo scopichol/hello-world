@@ -1,13 +1,10 @@
 body {
     margin:0 20px;
+    width:700px;
 }
 
 #login {
     float:right;
-}
-
-h2 {
-    clear:both;
 }
 
 div {
@@ -34,7 +31,7 @@ div {
     clear:both;
 }
 
-form div {
+form div div {
     text-align:right;
 }
 
