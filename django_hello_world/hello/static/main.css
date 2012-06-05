@@ -9,6 +9,11 @@ body {
 h2 {
     clear:both;
 }
+
+div {
+    margin-bottom:5px;
+}
+
 #leftcolumn {
     float:left;
     width:300px;
