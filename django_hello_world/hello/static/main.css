@@ -35,3 +35,8 @@ form div div {
     text-align:right;
 }
 
+#message {
+    padding:4px 5px 4px 25px; 
+    border-bottom:1px solid #ddd; 
+    background:#ffc url(admin/img/admin/icon_success.gif) 5px .3em no-repeat; 
+}
