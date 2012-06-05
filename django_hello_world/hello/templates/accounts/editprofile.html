@@ -27,8 +27,9 @@
 <script type="text/javascript">
 $(function(){
    $("#profileForm").ajaxForm(function() {
+        now = new Date();
         $("#message").remove();
-        $("#profileForm").before("<div id=\"message\">Save successfully!</div>");
+        $("#profileForm").before("<div id=\"message\">"+now.getHours()+":"+now.getMinutes()+" Save successfully!</div>");
    });
 });
 </script>
