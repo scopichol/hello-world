@@ -1,11 +1,28 @@
+body {
+    margin:0 20px;
+}
+
+#login {
+    float:right;
+}
+
+h2 {
+    clear:both;
+}
+
+div {
+    margin-bottom:5px;
+}
+
 #leftcolumn {
     float:left;
     width:300px;
 }
 
 #leftcolumn img {
-    width:300px;
+    width:290px;
     margin-bottom:10px;
+    border:1px solid black;
 }
 
 #rightcolumn {
@@ -20,3 +37,4 @@
 form div {
     text-align:right;
 }
+
