@@ -19,6 +19,7 @@ class MemoryFileUploadProgressHandler(MemoryFileUploadHandler):
         data = cache.get(self.cache_key)
         data['received'] += self.chunk_size
         cache.set(self.cache_key, data)
+        print '---- CHUNK', self.chunk_size
         return raw_data
         
     def new_file(self, field_name, file_name, content_type, content_length, charset=None):

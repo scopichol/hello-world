@@ -23,13 +23,33 @@
 </div>
 </form>
 <script type="text/javascript">
+var g_progress_intv = 0;
+
 function display_form_errors(errors, $form) {
     for (var k in errors) {
         $form.find('input[name=' + k + ']').after('<div class="error">' + errors[k] + '</div>');
     }
 }
+function startProgressBarUpdate() {
+    if(g_progress_intv != 0) {
+        clearInterval(g_progress_intv);
+    }
+    g_progress_intv = setInterval(function(){
+        $.getJSON("{% url uploadprogress %}", function(data){
+            if (data == null) {
+                //$("#uploadprogressbar").progressBar(100);
+                clearInterval(g_progress_intv);
+                g_progress_intv = 0;
+                return;
+            }
+            var percentage = Math.floor(100 * parseInt(data.received) / parseInt(data.size));
+            //$("#uploadprogressbar").progressBar(percentage);
+        });
+    }, 10);
+}
 $(function(){
     var options = {
+        async: true,
         success: function(data, statusText, xhr, $form) {
             now = new Date();
             $("#message").remove();
@@ -61,24 +81,9 @@ $(function(){
             $('#profileForm textarea').attr('disabled', false);
         }
     };
+    $.getJSON("{% url uploadprogress %}", function(data){});
     $("#profileForm").ajaxForm(options);
 });
-function startProgressBarUpdate() {
-    if(g_progress_intv != 0)
-        clearInterval(g_progress_intv);
-    g_progress_intv = setInterval(function() {
-        $.getJSON("{% url uploadprogress %}", function(data) {
-            if (data == null) {
-                //$("#uploadprogressbar").progressBar(100);
-                clearInterval(g_progress_intv);
-                g_progress_intv = 0;
-                return;
-            }
-            var percentage = Math.floor(100 * parseInt(data.received) / parseInt(data.size));
-            //$("#uploadprogressbar").progressBar(percentage);
-        });
-    }, 500);
-}
 </script>
 
 {% endblock content %}
