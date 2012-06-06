@@ -24,33 +24,43 @@
 </form>
 <script type="text/javascript">
 function display_form_errors(errors, $form) {
-    alert(errors);
     for (var k in errors) {
         $form.find('input[name=' + k + ']').after('<div class="error">' + errors[k] + '</div>');
     }
 }
 $(function(){
-   $("#profileForm").ajaxForm(function(data, statusText, xhr, $form) {
-        now = new Date();
-        $("#message").remove();
-        $form.find('.error').remove();
-        if (data['result'] == 'success') {
-            $form.before("<div id=\"message\">"+now.getHours()+":"+now.getMinutes()+" Save successfully!</div>");
+    var options = {
+        success: function(data, statusText, xhr, $form) {
+            now = new Date();
+            $("#message").remove();
+            $form.find('.error').remove();
+            if (data['result'] == 'success') {
+                $form.before("<div id=\"message\">"+now.getHours()+":"+now.getMinutes()+" Save successfully!</div>");
             
-            $form.find('#photo a').attr('href','{{MEDIA_URL}}'+data['response']['photo']).html(data['response']['photo']);
-            $form.find('#id_photo').val('');
-            $form.find('#imgphoto').attr('src','{{MEDIA_URL}}'+data['response']['photo']);
-            $form.find('#photo-clear_id').removeAttr('checked');
-            if (data['response']['photo']) {
-                $form.find('#imgphoto').css('display', 'inline');
-            } else {
-                $form.find('#imgphoto').css('display', 'none');
+                $form.find('#photo a').attr('href','{{MEDIA_URL}}'+data['response']['photo']).html(data['response']['photo']);
+                $form.find('#id_photo').val('');
+                $form.find('#imgphoto').attr('src','{{MEDIA_URL}}'+data['response']['photo']);
+                $form.find('#photo-clear_id').removeAttr('checked');
+                if (data['response']['photo']) {
+                    $form.find('#imgphoto').css('display', 'inline');
+                } else {
+                    $form.find('#imgphoto').css('display', 'none');
+                }
             }
+            else if (data['result'] == 'error') {
+                display_form_errors(data['response'], $form);
+            }
+        },
+        beforeSend: function(xhr, settings) {
+            $('#profileForm input').attr('disabled', true);
+            $('#profileForm textarea').attr('disabled', true);
+        },
+        complete: function(jqXHR, textStatus) {
+            $('#profileForm input').attr('disabled', false);
+            $('#profileForm textarea').attr('disabled', false);
         }
-        else if (data['result'] == 'error') {
-            display_form_errors(data['response'], $form);
-        }
-   });
+    };
+    $("#profileForm").ajaxForm(options);
 });
 </script>
 
