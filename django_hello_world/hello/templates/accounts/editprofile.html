@@ -52,6 +52,7 @@ $(function(){
             }
         },
         beforeSend: function(xhr, settings) {
+            startProgressBarUpdate();
             $('#profileForm input').attr('disabled', true);
             $('#profileForm textarea').attr('disabled', true);
         },
@@ -62,6 +63,22 @@ $(function(){
     };
     $("#profileForm").ajaxForm(options);
 });
+function startProgressBarUpdate() {
+    if(g_progress_intv != 0)
+        clearInterval(g_progress_intv);
+    g_progress_intv = setInterval(function() {
+        $.getJSON("{% url uploadprogress %}", function(data) {
+            if (data == null) {
+                //$("#uploadprogressbar").progressBar(100);
+                clearInterval(g_progress_intv);
+                g_progress_intv = 0;
+                return;
+            }
+            var percentage = Math.floor(100 * parseInt(data.received) / parseInt(data.size));
+            //$("#uploadprogressbar").progressBar(percentage);
+        });
+    }, 500);
+}
 </script>
 
 {% endblock content %}

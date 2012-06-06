@@ -56,6 +56,8 @@ MEDIA_ROOT = os.path.join(PROJECT_ROOT, 'uploads')
 # Examples: "http://media.lawrence.com/media/", "http://example.com/media/"
 MEDIA_URL = '/uploads/'
 
+FILE_UPLOAD_HANDLERS = ('django_hello_world.jquerywidgets.uploadhandlers.MemoryFileUploadProgressHandler', ) + global_settings.FILE_UPLOAD_HANDLERS
+
 # Absolute path to the directory static files should be collected to.
 # Don't put anything in this directory yourself; store your static files
 # in apps' "static/" subdirectories and in STATICFILES_DIRS.
